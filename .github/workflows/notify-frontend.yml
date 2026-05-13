@@ -1,0 +1,22 @@
+name: notify frontend
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    notify:
+        runs-on: ubuntu-latest
+        steps:
+            - name: dispatch to frontend
+              uses: actions/github-script@v7
+              with:
+                  github-token: ${{ secrets.FRONTEND_REPO_TOKEN }}
+                  script: |
+                      github.rest.actions.createWorkflowDispatch({
+                        owner: 'theeka-in',
+                        repo: 'frontend',
+                        workflow_id: 'codegen.yml',
+                        ref: 'main'
+                      })

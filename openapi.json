@@ -2488,13 +2488,9 @@
         "type": "object",
         "title": "HealthCheckResponse",
         "required": [
-          "is_working",
           "status"
         ],
         "properties": {
-          "is_working": {
-            "type": "boolean"
-          },
           "status": {
             "type": "string"
           }

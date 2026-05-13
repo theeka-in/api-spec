@@ -17,6 +17,6 @@ jobs:
                       github.rest.actions.createWorkflowDispatch({
                         owner: 'theeka-in',
                         repo: 'frontend',
-                        workflow_id: 'codegen.yml',
+                        workflow_id: 'codegen-openapi.yml',
                         ref: 'main'
                       })

@@ -2634,7 +2634,8 @@
         "required": [
           "phone",
           "password",
-          "name"
+          "name",
+          "avatar"
         ],
         "properties": {
           "phone": {
@@ -2649,6 +2650,9 @@
             "type": "string",
             "maxLength": 60,
             "minLength": 3
+          },
+          "avatar": {
+            "type": "string"
           }
         }
       },

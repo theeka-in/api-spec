@@ -2634,8 +2634,7 @@
         "required": [
           "phone",
           "password",
-          "name",
-          "avatar"
+          "name"
         ],
         "properties": {
           "phone": {

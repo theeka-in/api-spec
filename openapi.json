@@ -13,6 +13,18 @@
   "paths": {
     "/auth/register": {
       "post": {
+        "parameters": [
+          {
+            "name": "Authorization",
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "required": false,
+            "deprecated": false,
+            "explode": true
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json; charset=utf-8": {
@@ -30,6 +42,16 @@
               "application/json; charset=utf-8": {
                 "schema": {
                   "$ref": "#/components/schemas/SessionDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
                 }
               }
             }
@@ -59,6 +81,18 @@
     },
     "/auth/login": {
       "post": {
+        "parameters": [
+          {
+            "name": "Authorization",
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "required": false,
+            "deprecated": false,
+            "explode": true
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json; charset=utf-8": {
@@ -81,6 +115,16 @@
             }
           },
           "401": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "403": {
             "description": "",
             "content": {
               "application/json; charset=utf-8": {
@@ -2633,10 +2677,13 @@
         "properties": {
           "phone": {
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "maximum": 9999999999.0,
+            "minimum": 1111111111.0
           },
           "password": {
-            "type": "string"
+            "type": "string",
+            "minLength": 8
           }
         }
       },
@@ -2664,7 +2711,9 @@
         "properties": {
           "phone": {
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "maximum": 9999999999.0,
+            "minimum": 1111111111.0
           },
           "password": {
             "type": "string",

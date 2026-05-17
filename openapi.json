@@ -555,7 +555,7 @@
         ]
       }
     },
-    "/businesses": {
+    "/businesses/nearby": {
       "get": {
         "parameters": [
           {
@@ -606,6 +606,40 @@
             }
           }
         }
+      }
+    },
+    "/businesses": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BusinessDto"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       },
       "post": {
         "requestBody": {
@@ -2436,13 +2470,14 @@
         "type": "object",
         "title": "CreateBusinessDto",
         "required": [
-          "phone_number",
           "title"
         ],
         "properties": {
           "phone_number": {
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "maximum": 9999999999.0,
+            "minimum": 1111111111.0
           },
           "title": {
             "type": "string",

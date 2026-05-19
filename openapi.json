@@ -166,7 +166,7 @@
         },
         "security": [
           {
-            "BearerAuth": []
+            "AuthGuard": []
           }
         ]
       }
@@ -200,7 +200,7 @@
         },
         "security": [
           {
-            "BearerAuth": []
+            "AuthGuard": []
           }
         ]
       }
@@ -256,7 +256,7 @@
         },
         "security": [
           {
-            "BearerAuth": []
+            "AuthGuard": []
           }
         ]
       }
@@ -297,7 +297,7 @@
         },
         "security": [
           {
-            "BearerAuth": []
+            "AuthGuard": []
           }
         ]
       },
@@ -346,7 +346,7 @@
         },
         "security": [
           {
-            "BearerAuth": []
+            "AuthGuard": []
           }
         ]
       },
@@ -368,7 +368,7 @@
         },
         "security": [
           {
-            "BearerAuth": []
+            "AuthGuard": []
           }
         ]
       }
@@ -402,7 +402,7 @@
         },
         "security": [
           {
-            "BearerAuth": []
+            "AuthGuard": []
           }
         ]
       },
@@ -441,16 +441,16 @@
         },
         "security": [
           {
-            "BearerAuth": []
+            "AuthGuard": []
           }
         ]
       }
     },
-    "/users/me/addresses/{id}": {
+    "/users/me/addresses/{address_id}": {
       "patch": {
         "parameters": [
           {
-            "name": "id",
+            "name": "address_id",
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -505,14 +505,14 @@
         },
         "security": [
           {
-            "BearerAuth": []
+            "AuthGuard": []
           }
         ]
       },
       "delete": {
         "parameters": [
           {
-            "name": "id",
+            "name": "address_id",
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -550,62 +550,9 @@
         },
         "security": [
           {
-            "BearerAuth": []
+            "AuthGuard": []
           }
         ]
-      }
-    },
-    "/businesses/nearby": {
-      "get": {
-        "parameters": [
-          {
-            "name": "lat",
-            "schema": {
-              "type": "number",
-              "format": "double"
-            },
-            "in": "query",
-            "required": true,
-            "deprecated": false,
-            "explode": true
-          },
-          {
-            "name": "lng",
-            "schema": {
-              "type": "number",
-              "format": "double"
-            },
-            "in": "query",
-            "required": true,
-            "deprecated": false,
-            "explode": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json; charset=utf-8": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/BusinessDto"
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "",
-            "content": {
-              "application/json; charset=utf-8": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorDto"
-                }
-              }
-            }
-          }
-        }
       }
     },
     "/businesses": {
@@ -637,7 +584,7 @@
         },
         "security": [
           {
-            "BearerAuth": []
+            "AuthGuard": []
           }
         ]
       },
@@ -676,16 +623,16 @@
         },
         "security": [
           {
-            "BearerAuth": []
+            "AuthGuard": []
           }
         ]
       }
     },
-    "/businesses/{id}": {
+    "/businesses/{business_id}": {
       "get": {
         "parameters": [
           {
-            "name": "id",
+            "name": "business_id",
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -732,7 +679,7 @@
       "patch": {
         "parameters": [
           {
-            "name": "id",
+            "name": "business_id",
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -797,14 +744,14 @@
         },
         "security": [
           {
-            "BearerAuth": []
+            "AuthGuard": []
           }
         ]
       },
       "delete": {
         "parameters": [
           {
-            "name": "id",
+            "name": "business_id",
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -852,16 +799,264 @@
         },
         "security": [
           {
-            "BearerAuth": []
+            "AuthGuard": []
           }
         ]
       }
     },
-    "/businesses/{id}/hours": {
+    "/businesses/{business_id}/address": {
       "get": {
         "parameters": [
           {
-            "name": "id",
+            "name": "business_id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "in": "path",
+            "required": true,
+            "deprecated": false,
+            "explode": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessAddressDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "parameters": [
+          {
+            "name": "business_id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "in": "path",
+            "required": true,
+            "deprecated": false,
+            "explode": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json; charset=utf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBusinessAddressDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessAddressDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AuthGuard": []
+          }
+        ]
+      },
+      "patch": {
+        "parameters": [
+          {
+            "name": "business_id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "in": "path",
+            "required": true,
+            "deprecated": false,
+            "explode": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json; charset=utf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBusinessAddressDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessAddressDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AuthGuard": []
+          }
+        ]
+      },
+      "delete": {
+        "parameters": [
+          {
+            "name": "business_id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "in": "path",
+            "required": true,
+            "deprecated": false,
+            "explode": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AuthGuard": []
+          }
+        ]
+      }
+    },
+    "/businesses/{business_id}/hours": {
+      "get": {
+        "parameters": [
+          {
+            "name": "business_id",
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -901,7 +1096,7 @@
       "post": {
         "parameters": [
           {
-            "name": "id",
+            "name": "business_id",
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -956,16 +1151,16 @@
         },
         "security": [
           {
-            "BearerAuth": []
+            "AuthGuard": []
           }
         ]
       }
     },
-    "/businesses/{id}/hours/{day}": {
+    "/businesses/{business_id}/hours/{day}": {
       "patch": {
         "parameters": [
           {
-            "name": "id",
+            "name": "business_id",
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -978,7 +1173,7 @@
           {
             "name": "day",
             "schema": {
-              "type": "string"
+              "$ref": "#/components/schemas/DayOfWeekType"
             },
             "in": "path",
             "required": true,
@@ -1030,14 +1225,14 @@
         },
         "security": [
           {
-            "BearerAuth": []
+            "AuthGuard": []
           }
         ]
       },
       "delete": {
         "parameters": [
           {
-            "name": "id",
+            "name": "business_id",
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -1050,7 +1245,7 @@
           {
             "name": "day",
             "schema": {
-              "type": "string"
+              "$ref": "#/components/schemas/DayOfWeekType"
             },
             "in": "path",
             "required": true,
@@ -1085,16 +1280,16 @@
         },
         "security": [
           {
-            "BearerAuth": []
+            "AuthGuard": []
           }
         ]
       }
     },
-    "/businesses/{id}/media": {
+    "/businesses/{business_id}/media": {
       "get": {
         "parameters": [
           {
-            "name": "id",
+            "name": "business_id",
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -1134,7 +1329,7 @@
       "post": {
         "parameters": [
           {
-            "name": "id",
+            "name": "business_id",
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -1179,16 +1374,16 @@
         },
         "security": [
           {
-            "BearerAuth": []
+            "AuthGuard": []
           }
         ]
       }
     },
-    "/businesses/{id}/media/{media_id}": {
+    "/businesses/{business_id}/media/{media_id}": {
       "delete": {
         "parameters": [
           {
-            "name": "id",
+            "name": "business_id",
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -1237,7 +1432,7 @@
         },
         "security": [
           {
-            "BearerAuth": []
+            "AuthGuard": []
           }
         ]
       }
@@ -1422,7 +1617,7 @@
         },
         "security": [
           {
-            "BearerAuth": []
+            "AuthGuard": []
           }
         ]
       },
@@ -1488,7 +1683,7 @@
         },
         "security": [
           {
-            "BearerAuth": []
+            "AuthGuard": []
           }
         ]
       }
@@ -1552,7 +1747,7 @@
         },
         "security": [
           {
-            "BearerAuth": []
+            "AuthGuard": []
           }
         ]
       }
@@ -1616,7 +1811,7 @@
         },
         "security": [
           {
-            "BearerAuth": []
+            "AuthGuard": []
           }
         ]
       }
@@ -1657,6 +1852,16 @@
                   "items": {
                     "$ref": "#/components/schemas/ListingMediaDto"
                   }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
                 }
               }
             }
@@ -1729,6 +1934,16 @@
               }
             }
           },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
           "500": {
             "description": "",
             "content": {
@@ -1742,7 +1957,7 @@
         },
         "security": [
           {
-            "BearerAuth": []
+            "AuthGuard": []
           }
         ]
       }
@@ -1821,7 +2036,7 @@
         },
         "security": [
           {
-            "BearerAuth": []
+            "AuthGuard": []
           }
         ]
       }
@@ -1947,7 +2162,7 @@
         },
         "security": [
           {
-            "BearerAuth": []
+            "AuthGuard": []
           }
         ]
       }
@@ -2043,7 +2258,7 @@
         },
         "security": [
           {
-            "BearerAuth": []
+            "AuthGuard": []
           }
         ]
       },
@@ -2120,7 +2335,7 @@
         },
         "security": [
           {
-            "BearerAuth": []
+            "AuthGuard": []
           }
         ]
       }
@@ -2344,6 +2559,51 @@
   },
   "components": {
     "schemas": {
+      "BusinessAddressDto": {
+        "type": "object",
+        "title": "BusinessAddressDto",
+        "required": [
+          "complete_address",
+          "city",
+          "state",
+          "pincode",
+          "latitude",
+          "longitude",
+          "radius",
+          "business_id"
+        ],
+        "properties": {
+          "complete_address": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "pincode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "radius": {
+            "type": "number",
+            "format": "double"
+          },
+          "business_id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
       "BusinessAnalyticsDto": {
         "type": "object",
         "title": "BusinessAnalyticsDto",
@@ -2405,6 +2665,9 @@
           "owner_id": {
             "type": "string",
             "format": "uuid"
+          },
+          "address": {
+            "$ref": "#/components/schemas/BusinessAddressDto"
           }
         }
       },
@@ -2423,10 +2686,10 @@
             "format": "uuid"
           },
           "day": {
-            "type": "string"
+            "$ref": "#/components/schemas/DayOfWeekType"
           },
           "hours_type": {
-            "type": "string"
+            "$ref": "#/components/schemas/BusinessHourType"
           },
           "open_time": {
             "type": "string"
@@ -2439,6 +2702,14 @@
             "format": "uuid"
           }
         }
+      },
+      "BusinessHourType": {
+        "type": "string",
+        "enum": [
+          "Closed",
+          "Open24Hours",
+          "CustomRange"
+        ]
       },
       "BusinessMediaDto": {
         "type": "object",
@@ -2463,6 +2734,46 @@
           "business_id": {
             "type": "string",
             "format": "uuid"
+          }
+        }
+      },
+      "CreateBusinessAddressDto": {
+        "type": "object",
+        "title": "CreateBusinessAddressDto",
+        "required": [
+          "complete_address",
+          "city",
+          "state",
+          "pincode",
+          "latitude",
+          "longitude",
+          "radius"
+        ],
+        "properties": {
+          "complete_address": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "pincode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "radius": {
+            "type": "number",
+            "format": "double"
           }
         }
       },
@@ -2501,16 +2812,18 @@
         ],
         "properties": {
           "day": {
-            "type": "string"
+            "$ref": "#/components/schemas/DayOfWeekType"
           },
           "hours_type": {
-            "type": "string"
+            "$ref": "#/components/schemas/BusinessHourType"
           },
           "open_time": {
-            "type": "string"
+            "type": "string",
+            "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$"
           },
           "close_time": {
-            "type": "string"
+            "type": "string",
+            "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$"
           }
         }
       },
@@ -2695,6 +3008,18 @@
             "format": "double"
           }
         }
+      },
+      "DayOfWeekType": {
+        "type": "string",
+        "enum": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ]
       },
       "ErrorDto": {
         "type": "object",
@@ -2937,7 +3262,8 @@
           "user_agent",
           "ip_address",
           "created_at",
-          "account_id"
+          "account_id",
+          "user_id"
         ],
         "properties": {
           "token": {
@@ -2955,6 +3281,41 @@
           "account_id": {
             "type": "string",
             "format": "uuid"
+          },
+          "user_id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "UpdateBusinessAddressDto": {
+        "type": "object",
+        "title": "UpdateBusinessAddressDto",
+        "properties": {
+          "complete_address": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "pincode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "radius": {
+            "type": "number",
+            "format": "double"
           }
         }
       },
@@ -2987,13 +3348,15 @@
         "title": "UpdateBusinessHourDto",
         "properties": {
           "hours_type": {
-            "type": "string"
+            "$ref": "#/components/schemas/BusinessHourType"
           },
           "open_time": {
-            "type": "string"
+            "type": "string",
+            "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$"
           },
           "close_time": {
-            "type": "string"
+            "type": "string",
+            "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$"
           }
         }
       },
@@ -3207,7 +3570,7 @@
       }
     },
     "securitySchemes": {
-      "BearerAuth": {
+      "AuthGuard": {
         "type": "http",
         "scheme": "bearer"
       }

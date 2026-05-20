@@ -1437,7 +1437,7 @@
         ]
       }
     },
-    "/businesses/{business_id}/listings": {
+    "/businesses/{business_id}/listings/product": {
       "get": {
         "parameters": [
           {
@@ -1460,7 +1460,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ListingDto"
+                    "$ref": "#/components/schemas/ProductListingDto"
                   }
                 }
               }
@@ -1477,9 +1477,81 @@
             }
           }
         }
+      },
+      "post": {
+        "parameters": [
+          {
+            "name": "business_id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "in": "path",
+            "required": true,
+            "deprecated": false,
+            "explode": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json; charset=utf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProductListingDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductListingDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AuthGuard": []
+          }
+        ]
       }
     },
-    "/businesses/{business_id}/listings/{listing_id}": {
+    "/businesses/{business_id}/listings/product/{listing_id}": {
       "get": {
         "parameters": [
           {
@@ -1511,7 +1583,7 @@
             "content": {
               "application/json; charset=utf-8": {
                 "schema": {
-                  "$ref": "#/components/schemas/ListingDto"
+                  "$ref": "#/components/schemas/ProductListingDto"
                 }
               }
             }
@@ -1567,7 +1639,7 @@
           "content": {
             "application/json; charset=utf-8": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateListingDto"
+                "$ref": "#/components/schemas/UpdateProductListingDto"
               }
             }
           },
@@ -1579,7 +1651,7 @@
             "content": {
               "application/json; charset=utf-8": {
                 "schema": {
-                  "$ref": "#/components/schemas/ListingDto"
+                  "$ref": "#/components/schemas/ProductListingDto"
                 }
               }
             }
@@ -1688,8 +1760,8 @@
         ]
       }
     },
-    "/businesses/{business_id}/listings/product": {
-      "post": {
+    "/businesses/{business_id}/listings/service": {
+      "get": {
         "parameters": [
           {
             "name": "business_id",
@@ -1703,33 +1775,16 @@
             "explode": true
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json; charset=utf-8": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateProductListingDto"
-              }
-            }
-          },
-          "required": true
-        },
         "responses": {
-          "201": {
+          "200": {
             "description": "",
             "content": {
               "application/json; charset=utf-8": {
                 "schema": {
-                  "$ref": "#/components/schemas/ListingDto"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "",
-            "content": {
-              "application/json; charset=utf-8": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorDto"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ServiceListingDto"
+                  }
                 }
               }
             }
@@ -1744,15 +1799,8 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "AuthGuard": []
-          }
-        ]
-      }
-    },
-    "/businesses/{business_id}/listings/service": {
+        }
+      },
       "post": {
         "parameters": [
           {
@@ -1783,12 +1831,22 @@
             "content": {
               "application/json; charset=utf-8": {
                 "schema": {
-                  "$ref": "#/components/schemas/ListingDto"
+                  "$ref": "#/components/schemas/ServiceListingDto"
                 }
               }
             }
           },
           "403": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "404": {
             "description": "",
             "content": {
               "application/json; charset=utf-8": {
@@ -1816,7 +1874,216 @@
         ]
       }
     },
-    "/businesses/{business_id}/listings/{listing_id}/media": {
+    "/businesses/{business_id}/listings/service/{listing_id}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "business_id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "in": "path",
+            "required": true,
+            "deprecated": false,
+            "explode": true
+          },
+          {
+            "name": "listing_id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "in": "path",
+            "required": true,
+            "deprecated": false,
+            "explode": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceListingDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "parameters": [
+          {
+            "name": "business_id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "in": "path",
+            "required": true,
+            "deprecated": false,
+            "explode": true
+          },
+          {
+            "name": "listing_id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "in": "path",
+            "required": true,
+            "deprecated": false,
+            "explode": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json; charset=utf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateServiceListingDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceListingDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AuthGuard": []
+          }
+        ]
+      },
+      "delete": {
+        "parameters": [
+          {
+            "name": "business_id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "in": "path",
+            "required": true,
+            "deprecated": false,
+            "explode": true
+          },
+          {
+            "name": "listing_id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "in": "path",
+            "required": true,
+            "deprecated": false,
+            "explode": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AuthGuard": []
+          }
+        ]
+      }
+    },
+    "/businesses/{business_id}/listings/product/{listing_id}/media": {
       "get": {
         "parameters": [
           {
@@ -1962,7 +2229,232 @@
         ]
       }
     },
-    "/businesses/{business_id}/listings/{listing_id}/media/{media_id}": {
+    "/businesses/{business_id}/listings/product/{listing_id}/media/{media_id}": {
+      "delete": {
+        "parameters": [
+          {
+            "name": "business_id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "in": "path",
+            "required": true,
+            "deprecated": false,
+            "explode": true
+          },
+          {
+            "name": "listing_id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "in": "path",
+            "required": true,
+            "deprecated": false,
+            "explode": true
+          },
+          {
+            "name": "media_id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "in": "path",
+            "required": true,
+            "deprecated": false,
+            "explode": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AuthGuard": []
+          }
+        ]
+      }
+    },
+    "/businesses/{business_id}/listings/service/{listing_id}/media": {
+      "get": {
+        "parameters": [
+          {
+            "name": "business_id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "in": "path",
+            "required": true,
+            "deprecated": false,
+            "explode": true
+          },
+          {
+            "name": "listing_id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "in": "path",
+            "required": true,
+            "deprecated": false,
+            "explode": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListingMediaDto"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "parameters": [
+          {
+            "name": "business_id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "in": "path",
+            "required": true,
+            "deprecated": false,
+            "explode": true
+          },
+          {
+            "name": "listing_id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "in": "path",
+            "required": true,
+            "deprecated": false,
+            "explode": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json; charset=utf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateListingMediaDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListingMediaDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AuthGuard": []
+          }
+        ]
+      }
+    },
+    "/businesses/{business_id}/listings/service/{listing_id}/media/{media_id}": {
       "delete": {
         "parameters": [
           {
@@ -3073,54 +3565,6 @@
           }
         }
       },
-      "ListingDto": {
-        "type": "object",
-        "title": "ListingDto",
-        "required": [
-          "id",
-          "title",
-          "is_active",
-          "created_at",
-          "updated_at",
-          "business_id"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "title": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "logo": {
-            "type": "string"
-          },
-          "is_active": {
-            "type": "boolean"
-          },
-          "created_at": {
-            "type": "string"
-          },
-          "updated_at": {
-            "type": "string"
-          },
-          "business_id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "product_listing_id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "service_listing_id": {
-            "type": "string",
-            "format": "uuid"
-          }
-        }
-      },
       "ListingMediaDto": {
         "type": "object",
         "title": "ListingMediaDto",
@@ -3164,6 +3608,61 @@
           "password": {
             "type": "string",
             "minLength": 8
+          }
+        }
+      },
+      "ProductListingDto": {
+        "type": "object",
+        "title": "ProductListingDto",
+        "required": [
+          "id",
+          "title",
+          "is_active",
+          "created_at",
+          "updated_at",
+          "business_id",
+          "product_listing_id",
+          "price",
+          "stock"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "logo": {
+            "type": "string"
+          },
+          "is_active": {
+            "type": "boolean"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          },
+          "business_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "product_listing_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "stock": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -3251,6 +3750,59 @@
           "listing_id": {
             "type": "string",
             "format": "uuid"
+          }
+        }
+      },
+      "ServiceListingDto": {
+        "type": "object",
+        "title": "ServiceListingDto",
+        "required": [
+          "id",
+          "title",
+          "is_active",
+          "created_at",
+          "updated_at",
+          "business_id",
+          "service_listing_id",
+          "price",
+          "available"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "logo": {
+            "type": "string"
+          },
+          "is_active": {
+            "type": "boolean"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          },
+          "business_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "service_listing_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "price": {
+            "type": "string"
+          },
+          "available": {
+            "type": "boolean"
           }
         }
       },
@@ -3360,9 +3912,9 @@
           }
         }
       },
-      "UpdateListingDto": {
+      "UpdateProductListingDto": {
         "type": "object",
-        "title": "UpdateListingDto",
+        "title": "UpdateProductListingDto",
         "properties": {
           "title": {
             "type": "string",
@@ -3379,14 +3931,12 @@
             "type": "boolean"
           },
           "price": {
-            "type": "string"
+            "type": "number",
+            "format": "double"
           },
           "stock": {
             "type": "integer",
             "format": "int32"
-          },
-          "available": {
-            "type": "boolean"
           }
         }
       },
@@ -3409,6 +3959,32 @@
             "type": "string",
             "maxLength": 1000,
             "minLength": 3
+          }
+        }
+      },
+      "UpdateServiceListingDto": {
+        "type": "object",
+        "title": "UpdateServiceListingDto",
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 120,
+            "minLength": 3
+          },
+          "description": {
+            "type": "string"
+          },
+          "logo": {
+            "type": "string"
+          },
+          "is_active": {
+            "type": "boolean"
+          },
+          "price": {
+            "type": "string"
+          },
+          "available": {
+            "type": "boolean"
           }
         }
       },

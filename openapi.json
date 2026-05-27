@@ -1439,6 +1439,30 @@
     },
     "/businesses/listings/product/explore": {
       "get": {
+        "parameters": [
+          {
+            "name": "latitude",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            },
+            "in": "query",
+            "required": true,
+            "deprecated": false,
+            "explode": true
+          },
+          {
+            "name": "longitude",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            },
+            "in": "query",
+            "required": true,
+            "deprecated": false,
+            "explode": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -1468,6 +1492,30 @@
     },
     "/businesses/listings/service/explore": {
       "get": {
+        "parameters": [
+          {
+            "name": "latitude",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            },
+            "in": "query",
+            "required": true,
+            "deprecated": false,
+            "explode": true
+          },
+          {
+            "name": "longitude",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            },
+            "in": "query",
+            "required": true,
+            "deprecated": false,
+            "explode": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -3113,17 +3161,27 @@
         "type": "object",
         "title": "BusinessAddressDto",
         "required": [
-          "complete_address",
+          "address_line1",
+          "address_line2",
+          "pincode",
           "city",
           "state",
-          "pincode",
           "latitude",
           "longitude",
           "radius",
           "business_id"
         ],
         "properties": {
-          "complete_address": {
+          "address_line1": {
+            "type": "string"
+          },
+          "address_line2": {
+            "type": "string"
+          },
+          "landmark": {
+            "type": "string"
+          },
+          "pincode": {
             "type": "string"
           },
           "city": {
@@ -3131,10 +3189,6 @@
           },
           "state": {
             "type": "string"
-          },
-          "pincode": {
-            "type": "integer",
-            "format": "int32"
           },
           "latitude": {
             "type": "number",
@@ -3291,16 +3345,26 @@
         "type": "object",
         "title": "CreateBusinessAddressDto",
         "required": [
-          "complete_address",
+          "address_line1",
+          "address_line2",
+          "pincode",
           "city",
           "state",
-          "pincode",
           "latitude",
           "longitude",
           "radius"
         ],
         "properties": {
-          "complete_address": {
+          "address_line1": {
+            "type": "string"
+          },
+          "address_line2": {
+            "type": "string"
+          },
+          "landmark": {
+            "type": "string"
+          },
+          "pincode": {
             "type": "string"
           },
           "city": {
@@ -3308,10 +3372,6 @@
           },
           "state": {
             "type": "string"
-          },
-          "pincode": {
-            "type": "integer",
-            "format": "int32"
           },
           "latitude": {
             "type": "number",
@@ -3902,7 +3962,16 @@
         "type": "object",
         "title": "UpdateBusinessAddressDto",
         "properties": {
-          "complete_address": {
+          "address_line1": {
+            "type": "string"
+          },
+          "address_line2": {
+            "type": "string"
+          },
+          "landmark": {
+            "type": "string"
+          },
+          "pincode": {
             "type": "string"
           },
           "city": {
@@ -3910,10 +3979,6 @@
           },
           "state": {
             "type": "string"
-          },
-          "pincode": {
-            "type": "integer",
-            "format": "int32"
           },
           "latitude": {
             "type": "number",

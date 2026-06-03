@@ -304,7 +304,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "get_myself"
       },
       "patch": {
         "requestBody": {
@@ -353,7 +354,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "update_myself"
       },
       "delete": {
         "responses": {
@@ -375,7 +377,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "delete_myself"
       }
     },
     "/users/me/addresses": {
@@ -409,7 +412,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "get_my_addresses"
       },
       "post": {
         "requestBody": {
@@ -448,7 +452,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "create_my_address"
       }
     },
     "/users/me/addresses/{address_id}": {
@@ -512,7 +517,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "update_my_address"
       },
       "delete": {
         "parameters": [
@@ -557,7 +563,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "delete_my_address"
       }
     },
     "/businesses": {

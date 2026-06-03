@@ -76,7 +76,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "register"
       }
     },
     "/auth/login": {
@@ -144,7 +145,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "login"
       }
     },
     "/auth/logout": {
@@ -168,7 +170,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "logout"
       }
     },
     "/auth/sessions": {
@@ -202,7 +205,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "get_sessions"
       }
     },
     "/auth/sessions/{token}": {
@@ -258,7 +262,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "delete_session"
       }
     },
     "/users/me": {
@@ -586,7 +591,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "get_my_businesses"
       },
       "post": {
         "requestBody": {
@@ -625,7 +631,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "create_business"
       }
     },
     "/businesses/{business_id}": {
@@ -674,7 +681,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "get_business_by_id"
       },
       "patch": {
         "parameters": [
@@ -746,7 +754,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "update_business"
       },
       "delete": {
         "parameters": [
@@ -801,7 +810,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "delete_business"
       }
     },
     "/businesses/{business_id}/address": {
@@ -850,7 +860,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "get_business_address"
       },
       "post": {
         "parameters": [
@@ -922,7 +933,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "create_business_address"
       },
       "patch": {
         "parameters": [
@@ -994,7 +1006,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "update_business_address"
       },
       "delete": {
         "parameters": [
@@ -1049,7 +1062,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "delete_business_address"
       }
     },
     "/businesses/{business_id}/hours": {
@@ -1091,7 +1105,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "get_business_hours"
       },
       "post": {
         "parameters": [
@@ -1153,7 +1168,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "create_business_hour"
       }
     },
     "/businesses/{business_id}/hours/{day}": {
@@ -1227,7 +1243,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "update_business_hour"
       },
       "delete": {
         "parameters": [
@@ -1282,7 +1299,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "delete_business_hour"
       }
     },
     "/businesses/{business_id}/media": {
@@ -1324,7 +1342,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "get_business_media"
       },
       "post": {
         "parameters": [
@@ -1376,7 +1395,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "create_business_media"
       }
     },
     "/businesses/{business_id}/media/{media_id}": {
@@ -1434,7 +1454,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "delete_business_media"
       }
     },
     "/businesses/listings/product/explore": {
@@ -1497,7 +1518,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "explore_product_listings_nearby"
       }
     },
     "/businesses/listings/service/explore": {
@@ -1560,7 +1582,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "explore_service_listings_nearby"
       }
     },
     "/businesses/{business_id}/listings/product": {
@@ -1602,7 +1625,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "get_product_listings"
       },
       "post": {
         "parameters": [
@@ -1674,7 +1698,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "create_product_listing"
       }
     },
     "/businesses/{business_id}/listings/product/{listing_id}": {
@@ -1734,7 +1759,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "get_product_listing_by_id"
       },
       "patch": {
         "parameters": [
@@ -1817,7 +1843,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "update_product_listing"
       },
       "delete": {
         "parameters": [
@@ -1883,7 +1910,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "delete_product_listing"
       }
     },
     "/businesses/{business_id}/listings/service": {
@@ -1925,7 +1953,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "get_service_listings"
       },
       "post": {
         "parameters": [
@@ -1997,7 +2026,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "create_service_listing"
       }
     },
     "/businesses/{business_id}/listings/service/{listing_id}": {
@@ -2057,7 +2087,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "get_service_listing_by_id"
       },
       "patch": {
         "parameters": [
@@ -2140,7 +2171,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "update_service_listing"
       },
       "delete": {
         "parameters": [
@@ -2206,7 +2238,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "delete_service_listing"
       }
     },
     "/businesses/{business_id}/listings/product/{listing_id}/media": {
@@ -2269,7 +2302,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "get_product_listing_media"
       },
       "post": {
         "parameters": [
@@ -2352,7 +2386,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "create_product_listing_media"
       }
     },
     "/businesses/{business_id}/listings/product/{listing_id}/media/{media_id}": {
@@ -2431,7 +2466,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "delete_product_listing_media"
       }
     },
     "/businesses/{business_id}/listings/service/{listing_id}/media": {
@@ -2494,7 +2530,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "get_service_listing_media"
       },
       "post": {
         "parameters": [
@@ -2577,7 +2614,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "create_service_listing_media"
       }
     },
     "/businesses/{business_id}/listings/service/{listing_id}/media/{media_id}": {
@@ -2656,7 +2694,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "delete_service_listing_media"
       }
     },
     "/businesses/{business_id}/listings/{listing_id}/reviews": {
@@ -2709,7 +2748,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "get_review_by_listing"
       },
       "post": {
         "parameters": [
@@ -2782,7 +2822,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "create_review"
       }
     },
     "/businesses/{business_id}/listings/{listing_id}/reviews/{review_id}": {
@@ -2878,7 +2919,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "update_review"
       },
       "delete": {
         "parameters": [
@@ -2955,7 +2997,8 @@
           {
             "AuthGuard": []
           }
-        ]
+        ],
+        "operationId": "delete_review"
       }
     },
     "/businesses/{business_id}/views": {
@@ -3171,7 +3214,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "check"
       }
     }
   },

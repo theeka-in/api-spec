@@ -3054,7 +3054,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "record_business_view"
       }
     },
     "/businesses/{business_id}/listings/{listing_id}/views": {
@@ -3104,7 +3105,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "record_listing_view"
       }
     },
     "/businesses/{business_id}/analytics": {
@@ -3153,7 +3155,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "get_business_analytics"
       }
     },
     "/businesses/{business_id}/listings/analytics": {
@@ -3205,7 +3208,8 @@
               }
             }
           }
-        }
+        },
+        "operationId": "get_listing_analytics"
       }
     },
     "/health": {

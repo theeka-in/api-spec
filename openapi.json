@@ -1509,7 +1509,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ProductListingDto"
+                    "$ref": "#/components/schemas/ExploreProductListingDto"
                   }
                 }
               }
@@ -1573,7 +1573,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ServiceListingDto"
+                    "$ref": "#/components/schemas/ExploreServiceListingDto"
                   }
                 }
               }
@@ -3718,6 +3718,94 @@
           }
         }
       },
+      "ExploreListingDto": {
+        "type": "object",
+        "title": "ExploreListingDto",
+        "required": [
+          "id",
+          "title",
+          "is_active",
+          "created_at",
+          "updated_at",
+          "media",
+          "business"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "logo": {
+            "type": "string"
+          },
+          "is_active": {
+            "type": "boolean"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          },
+          "media": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ListingMediaDto"
+            }
+          },
+          "business": {
+            "$ref": "#/components/schemas/BusinessDto"
+          }
+        }
+      },
+      "ExploreProductListingDto": {
+        "type": "object",
+        "title": "ExploreProductListingDto",
+        "required": [
+          "price",
+          "stock",
+          "listing"
+        ],
+        "properties": {
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "stock": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "listing": {
+            "$ref": "#/components/schemas/ExploreListingDto"
+          }
+        }
+      },
+      "ExploreServiceListingDto": {
+        "type": "object",
+        "title": "ExploreServiceListingDto",
+        "required": [
+          "price",
+          "available",
+          "listing"
+        ],
+        "properties": {
+          "price": {
+            "type": "string"
+          },
+          "available": {
+            "type": "boolean"
+          },
+          "listing": {
+            "$ref": "#/components/schemas/ExploreListingDto"
+          }
+        }
+      },
       "HealthCheckResponse": {
         "type": "object",
         "title": "HealthCheckResponse",
@@ -3755,6 +3843,41 @@
           "business_id": {
             "type": "string",
             "format": "uuid"
+          }
+        }
+      },
+      "ListingDto": {
+        "type": "object",
+        "title": "ListingDto",
+        "required": [
+          "id",
+          "title",
+          "is_active",
+          "created_at",
+          "updated_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "logo": {
+            "type": "string"
+          },
+          "is_active": {
+            "type": "boolean"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
           }
         }
       },
@@ -3808,47 +3931,11 @@
         "type": "object",
         "title": "ProductListingDto",
         "required": [
-          "id",
-          "title",
-          "is_active",
-          "created_at",
-          "updated_at",
-          "business_id",
-          "product_listing_id",
           "price",
-          "stock"
+          "stock",
+          "listing"
         ],
         "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "title": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "logo": {
-            "type": "string"
-          },
-          "is_active": {
-            "type": "boolean"
-          },
-          "created_at": {
-            "type": "string"
-          },
-          "updated_at": {
-            "type": "string"
-          },
-          "business_id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "product_listing_id": {
-            "type": "string",
-            "format": "uuid"
-          },
           "price": {
             "type": "number",
             "format": "double"
@@ -3856,6 +3943,9 @@
           "stock": {
             "type": "integer",
             "format": "int32"
+          },
+          "listing": {
+            "$ref": "#/components/schemas/ListingDto"
           }
         }
       },
@@ -3950,52 +4040,19 @@
         "type": "object",
         "title": "ServiceListingDto",
         "required": [
-          "id",
-          "title",
-          "is_active",
-          "created_at",
-          "updated_at",
-          "business_id",
-          "service_listing_id",
           "price",
-          "available"
+          "available",
+          "listing"
         ],
         "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "title": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "logo": {
-            "type": "string"
-          },
-          "is_active": {
-            "type": "boolean"
-          },
-          "created_at": {
-            "type": "string"
-          },
-          "updated_at": {
-            "type": "string"
-          },
-          "business_id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "service_listing_id": {
-            "type": "string",
-            "format": "uuid"
-          },
           "price": {
             "type": "string"
           },
           "available": {
             "type": "boolean"
+          },
+          "listing": {
+            "$ref": "#/components/schemas/ListingDto"
           }
         }
       },

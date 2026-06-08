@@ -663,7 +663,7 @@
             "content": {
               "application/json; charset=utf-8": {
                 "schema": {
-                  "$ref": "#/components/schemas/BusinessDto"
+                  "$ref": "#/components/schemas/BusinessWithOwnerAndAddressDto"
                 }
               }
             }
@@ -3228,6 +3228,99 @@
         },
         "operationId": "check"
       }
+    },
+    "/location/search": {
+      "get": {
+        "parameters": [
+          {
+            "name": "query",
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "required": true,
+            "deprecated": false,
+            "explode": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LocationDto"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "location_search"
+      }
+    },
+    "/location/reverse": {
+      "get": {
+        "parameters": [
+          {
+            "name": "lat",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            },
+            "in": "query",
+            "required": true,
+            "deprecated": false,
+            "explode": true
+          },
+          {
+            "name": "lon",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            },
+            "in": "query",
+            "required": true,
+            "deprecated": false,
+            "explode": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocationDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "location_reverse"
+      }
     }
   },
   "components": {
@@ -3344,9 +3437,6 @@
           "owner_id": {
             "type": "string",
             "format": "uuid"
-          },
-          "address": {
-            "$ref": "#/components/schemas/BusinessAddressDto"
           }
         }
       },
@@ -3413,6 +3503,55 @@
           "business_id": {
             "type": "string",
             "format": "uuid"
+          }
+        }
+      },
+      "BusinessWithOwnerAndAddressDto": {
+        "type": "object",
+        "title": "BusinessWithOwnerAndAddressDto",
+        "required": [
+          "id",
+          "phone_number",
+          "is_closed",
+          "title",
+          "created_at",
+          "owner_id",
+          "owner",
+          "address"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "phone_number": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "is_closed": {
+            "type": "boolean"
+          },
+          "title": {
+            "type": "string"
+          },
+          "logo": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "owner_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "owner": {
+            "$ref": "#/components/schemas/UserDto"
+          },
+          "address": {
+            "$ref": "#/components/schemas/BusinessAddressDto"
           }
         }
       },
@@ -3718,10 +3857,11 @@
           }
         }
       },
-      "ExploreListingDto": {
+      "ExploreProductListingDto": {
         "type": "object",
-        "title": "ExploreListingDto",
+        "title": "ExploreProductListingDto",
         "required": [
+          "product",
           "id",
           "title",
           "is_active",
@@ -3731,6 +3871,9 @@
           "business"
         ],
         "properties": {
+          "product": {
+            "$ref": "#/components/schemas/ProductDto"
+          },
           "id": {
             "type": "string",
             "format": "uuid"
@@ -3760,29 +3903,7 @@
             }
           },
           "business": {
-            "$ref": "#/components/schemas/BusinessDto"
-          }
-        }
-      },
-      "ExploreProductListingDto": {
-        "type": "object",
-        "title": "ExploreProductListingDto",
-        "required": [
-          "price",
-          "stock",
-          "listing"
-        ],
-        "properties": {
-          "price": {
-            "type": "number",
-            "format": "double"
-          },
-          "stock": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "listing": {
-            "$ref": "#/components/schemas/ExploreListingDto"
+            "$ref": "#/components/schemas/BusinessWithOwnerAndAddressDto"
           }
         }
       },
@@ -3790,19 +3911,49 @@
         "type": "object",
         "title": "ExploreServiceListingDto",
         "required": [
-          "price",
-          "available",
-          "listing"
+          "service",
+          "id",
+          "title",
+          "is_active",
+          "created_at",
+          "updated_at",
+          "media",
+          "business"
         ],
         "properties": {
-          "price": {
+          "service": {
+            "$ref": "#/components/schemas/ServiceDto"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
             "type": "string"
           },
-          "available": {
+          "description": {
+            "type": "string"
+          },
+          "logo": {
+            "type": "string"
+          },
+          "is_active": {
             "type": "boolean"
           },
-          "listing": {
-            "$ref": "#/components/schemas/ExploreListingDto"
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          },
+          "media": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ListingMediaDto"
+            }
+          },
+          "business": {
+            "$ref": "#/components/schemas/BusinessWithOwnerAndAddressDto"
           }
         }
       },
@@ -3846,41 +3997,6 @@
           }
         }
       },
-      "ListingDto": {
-        "type": "object",
-        "title": "ListingDto",
-        "required": [
-          "id",
-          "title",
-          "is_active",
-          "created_at",
-          "updated_at"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "title": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "logo": {
-            "type": "string"
-          },
-          "is_active": {
-            "type": "boolean"
-          },
-          "created_at": {
-            "type": "string"
-          },
-          "updated_at": {
-            "type": "string"
-          }
-        }
-      },
       "ListingMediaDto": {
         "type": "object",
         "title": "ListingMediaDto",
@@ -3907,6 +4023,71 @@
           }
         }
       },
+      "LocationDto": {
+        "type": "object",
+        "title": "LocationDto",
+        "required": [
+          "id",
+          "osm_key",
+          "osm_type",
+          "osm_value",
+          "lat",
+          "lon"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "uint64"
+          },
+          "osm_key": {
+            "type": "string"
+          },
+          "osm_type": {
+            "$ref": "#/components/schemas/OsmType"
+          },
+          "osm_value": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "district": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "county": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "country_iso_code": {
+            "type": "string"
+          },
+          "postcode": {
+            "type": "string"
+          },
+          "street": {
+            "type": "string"
+          },
+          "house_number": {
+            "type": "string"
+          },
+          "lat": {
+            "type": "number",
+            "format": "double"
+          },
+          "lon": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
       "LoginDto": {
         "type": "object",
         "title": "LoginDto",
@@ -3927,15 +4108,27 @@
           }
         }
       },
-      "ProductListingDto": {
+      "OsmType": {
+        "type": "string",
+        "enum": [
+          "Node",
+          "Way",
+          "Relation"
+        ]
+      },
+      "ProductDto": {
         "type": "object",
-        "title": "ProductListingDto",
+        "title": "ProductDto",
         "required": [
+          "id",
           "price",
-          "stock",
-          "listing"
+          "stock"
         ],
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
           "price": {
             "type": "number",
             "format": "double"
@@ -3943,9 +4136,45 @@
           "stock": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "ProductListingDto": {
+        "type": "object",
+        "title": "ProductListingDto",
+        "required": [
+          "id",
+          "title",
+          "is_active",
+          "created_at",
+          "updated_at",
+          "product"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
           },
-          "listing": {
-            "$ref": "#/components/schemas/ListingDto"
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "logo": {
+            "type": "string"
+          },
+          "is_active": {
+            "type": "boolean"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          },
+          "product": {
+            "$ref": "#/components/schemas/ProductDto"
           }
         }
       },
@@ -4036,23 +4265,63 @@
           }
         }
       },
-      "ServiceListingDto": {
+      "ServiceDto": {
         "type": "object",
-        "title": "ServiceListingDto",
+        "title": "ServiceDto",
         "required": [
+          "id",
           "price",
-          "available",
-          "listing"
+          "available"
         ],
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
           "price": {
             "type": "string"
           },
           "available": {
             "type": "boolean"
+          }
+        }
+      },
+      "ServiceListingDto": {
+        "type": "object",
+        "title": "ServiceListingDto",
+        "required": [
+          "id",
+          "title",
+          "is_active",
+          "created_at",
+          "updated_at",
+          "service"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
           },
-          "listing": {
-            "$ref": "#/components/schemas/ListingDto"
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "logo": {
+            "type": "string"
+          },
+          "is_active": {
+            "type": "boolean"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          },
+          "service": {
+            "$ref": "#/components/schemas/ServiceDto"
           }
         }
       },

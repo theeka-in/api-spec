@@ -356,29 +356,6 @@
           }
         ],
         "operationId": "update_myself"
-      },
-      "delete": {
-        "responses": {
-          "204": {
-            "description": ""
-          },
-          "500": {
-            "description": "",
-            "content": {
-              "application/json; charset=utf-8": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorDto"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "AuthGuard": []
-          }
-        ],
-        "operationId": "delete_myself"
       }
     },
     "/users/me/addresses": {
@@ -3710,18 +3687,6 @@
           "stock": {
             "type": "integer",
             "format": "int32"
-          },
-          "categories": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "tags": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
           }
         }
       },
@@ -3777,18 +3742,6 @@
           },
           "available": {
             "type": "boolean"
-          },
-          "categories": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "tags": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
           }
         }
       },

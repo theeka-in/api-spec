@@ -3723,7 +3723,8 @@
         "required": [
           "title",
           "price",
-          "available"
+          "available",
+          "service_listing_type_id"
         ],
         "properties": {
           "title": {
@@ -3742,6 +3743,10 @@
           },
           "available": {
             "type": "boolean"
+          },
+          "service_listing_type_id": {
+            "type": "string",
+            "format": "uuid"
           }
         }
       },
@@ -4462,6 +4467,10 @@
           },
           "available": {
             "type": "boolean"
+          },
+          "service_listing_type_id": {
+            "type": "string",
+            "format": "uuid"
           }
         }
       },
